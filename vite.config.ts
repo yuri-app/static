@@ -55,7 +55,9 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
+        '@vueuse/core',
       ],
+      dirs: ['src/request/**'],
       vueTemplate: true,
       dts: 'src/auto-imports.d.ts',
     }),
@@ -70,4 +72,9 @@ export default defineConfig({
       loose: true,
     }),
   ],
+  server: {
+    proxy: {
+      '/scope': 'http://127.0.0.1:1326/',
+    },
+  },
 })
