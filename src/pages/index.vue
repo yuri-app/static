@@ -2,6 +2,7 @@
 import { DataViewProps } from 'primevue/dataview';
 
 import { RootResponse } from '@/request';
+import empty from '@/assets/empty.svg'
 
 const layout = ref<DataViewProps['layout']>('list')
 
@@ -38,6 +39,13 @@ init()
           <Link v-for="{ scope, path } in slotProps.items" :key="scope" class="p-3"
           :to="`/${scope}/${encodeURIComponent('/')}`" type="directory" :name="path" :layout="layout">
         </Link>
+      </div>
+    </template>
+
+    <template #empty>
+      <div flex flex-col items-center justify-center h-full>
+        <img :src="empty" width="300">
+        <div text-6 mt-6>Empty</div>
       </div>
     </template>
   </DataView>

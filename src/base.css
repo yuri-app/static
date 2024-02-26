@@ -37,3 +37,7 @@
   flex: 1;
   overflow-y: auto;
 }
+
+[data-pc-name="dataview"] [data-pc-section="emptymessage"] {
+  height: 100%;
+}
