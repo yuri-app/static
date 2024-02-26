@@ -3,6 +3,7 @@ import { ListResponse } from '@/request/'
 import { DataViewProps } from 'primevue/dataview';
 
 const route = useRoute()
+const router = useRouter()
 
 const props = defineProps<{
   scope: string
@@ -15,7 +16,7 @@ const validPath = ref(true)
 const origin = ref('')
 const layout = ref<DataViewProps['layout']>('list')
 
-// const valid = computed(() => validScope.value && validPath.value)
+const valid = computed(() => validScope.value && validPath.value)
 const backPath = computed(() => {
   if (props.path == '/') {
     return '/'
@@ -47,6 +48,12 @@ async function init() {
 }
 
 watchImmediate(() => route.fullPath, init)
+
+watch(valid, v => {
+  if (!v) {
+    router.push('/404')
+  }
+})
 </script>
 
 
