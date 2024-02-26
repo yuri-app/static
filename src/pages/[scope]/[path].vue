@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ListResponse } from '@/request/'
+import { DataViewProps } from 'primevue/dataview';
 
 const route = useRoute()
 const router = useRouter()
@@ -13,6 +14,7 @@ const list = ref<ListResponse>([])
 const validScope = ref(true)
 const validPath = ref(true)
 const origin = ref('')
+const layout = ref<DataViewProps['layout']>('list')
 
 const root = computed(() => props.path == '/')
 const valid = computed(() => validScope.value && validPath.value)
@@ -51,12 +53,34 @@ watchImmediate(() => route.fullPath, init)
 <template>
   <div>
     <div v-if="valid">
-      <Button v-if="!root" icon="i-mdi:arrow-left" label="back" @click="back" />
-      <div v-for="{ name, type } in list" :key="name + type">
-        <router-link :to="$route.fullPath + encodeURIComponent(name + '/')" v-if="type == 'directory'">{{ name }}</router-link>
-        <router-link v-else :to="`/file/${encodeURIComponent(origin + props.path + name)}`">{{ name }}</router-link>
-        <div>{{ type }}</div>
-      </div>
+      <DataView :value="list" :layout="layout" :data-key="undefined">
+        <template #header>
+          <div class="flex">
+            <Button v-if="!root" icon="i-mdi:arrow-left" label="back" @click="back" />
+            <div flex-1></div>
+            <DataViewLayoutOptions v-model="layout" />
+          </div>
+        </template>
+
+        <template #list="slotProps">
+          <div class="flex flex-wrap">
+            <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="w-full p-3"
+              :to="type == 'directory' ? `${$route.fullPath}${encodeURIComponent(name + '/')}` : `/file/${encodeURIComponent(origin + props.path + name)}`"
+              :type="type" :name="name" :layout="layout">
+
+            </Link>
+          </div>
+        </template>
+
+        <template #grid="slotProps">
+          <div class="flex flex-wrap">
+            <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="w-1/2 sm:w-1/3 xl:w-1/4 p-3"
+              :to="type == 'directory' ? `${$route.fullPath}${encodeURIComponent(name + '/')}` : `/file/${encodeURIComponent(origin + props.path + name)}`"
+              :type="type" :name="name" :layout="layout">
+            </Link>
+          </div>
+        </template>
+      </DataView>
     </div>
     <div v-else>
       scope or path is invalid

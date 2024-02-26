@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.8.0",
+    "classnames": "^2.5.1",
     "primevue": "^3.49.0",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"

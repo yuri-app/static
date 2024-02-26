@@ -8,6 +8,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
+    DataView: typeof import('primevue/dataview')['default']
+    DataViewLayoutOptions: typeof import('primevue/dataviewlayoutoptions')['default']
+    Link: typeof import('./components/dataview/Link.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
