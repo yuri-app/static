@@ -17,10 +17,29 @@ interface ScopeResponse {
   origin: string
 }
 
+export interface RootResponse {
+  list: RootDirectory[]
+}
+
+interface RootDirectory {
+  scope: string
+  path: string
+}
+
+
 export type ListResponse = Array<StaticDirectory | StaticFile>
 
 export async function fetchScope(scope: string) {
-  const result: ScopeResponse | null = await (await fetch('/scope/' + scope, {
+  const result: ScopeResponse | null = await (await fetch('/api/scope/' + scope, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })).json()
+  return result
+}
+
+export async function fetchRoot() {
+  const result: RootResponse = await (await fetch('/api/root', {
     headers: {
       "Content-Type": "application/json",
     }

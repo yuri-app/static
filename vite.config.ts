@@ -75,7 +75,7 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       proxy: {
-        '/scope': 'http://127.0.0.1:14370/',
+        '/api': 'http://127.0.0.1:7576/',
       },
     },
     base: mode == 'development' ? '/' : '/static',

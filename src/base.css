@@ -23,3 +23,17 @@
     --surface-900: 15 23 42;
     --surface-950: 3 6 23;
 }
+
+#app {
+  height: 100vh;
+}
+
+[data-pc-name="dataview"] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-pc-name="dataview"] [data-pc-section="content"] {
+  flex: 1;
+  overflow-y: auto;
+}
