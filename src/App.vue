@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { appProvide, Layout } from '@/inject'
 
+const layout = ref<Layout>('list')
+
+appProvide({
+  layout
+})
 </script>
 
 

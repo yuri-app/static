@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { DataViewProps } from 'primevue/dataview';
+import { appInject } from '@/inject'
 
 import { RootResponse } from '@/request';
 import empty from '@/assets/empty.svg'
 
-const layout = ref<DataViewProps['layout']>('list')
+const { layout } = appInject()
 
 const list = ref<RootResponse['list']>([])
 

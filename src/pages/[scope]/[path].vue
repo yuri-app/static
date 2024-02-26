@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ListResponse } from '@/request/'
-import { DataViewProps } from 'primevue/dataview';
+import { appInject } from '@/inject'
+
 
 const route = useRoute()
 const router = useRouter()
@@ -14,7 +15,7 @@ const list = ref<ListResponse>([])
 const validScope = ref(true)
 const validPath = ref(true)
 const origin = ref('')
-const layout = ref<DataViewProps['layout']>('list')
+const { layout } = appInject()
 
 const valid = computed(() => validScope.value && validPath.value)
 const backPath = computed(() => {
