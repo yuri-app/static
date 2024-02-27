@@ -1,3 +1,5 @@
+import { resolve } from 'node:path'
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Unocss from 'unocss/vite'
@@ -7,12 +9,16 @@ import Components from 'unplugin-vue-components/vite'
 import Pages from 'vite-plugin-pages'
 import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
       vue(),
+      VueI18nPlugin({
+        include: [resolve('src/locales/**.yaml')],
+      }),
       Unocss({
         presets: [presetUno(), presetAttributify(), presetIcons()],
         theme: {
@@ -74,8 +80,9 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     server: {
+      host: true,
       proxy: {
-        '/api': 'http://127.0.0.1:7576/',
+        '/api': 'http://127.0.0.1:13863/',
       },
     },
     base: mode == 'development' ? '/' : '/static',

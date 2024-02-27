@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import PrimeVue from 'primevue/config';
 import Ripple from 'primevue/ripple';
 
+import { i18n } from '@/locales'
 import Lara from '@/primevue-presets/lara';
 
 import routes from '~pages'
@@ -19,6 +20,7 @@ const router = createRouter({
 })
 
 createApp(App)
+  .use(i18n)
   .use(router)
   .use(PrimeVue, {
     unstyled: true,

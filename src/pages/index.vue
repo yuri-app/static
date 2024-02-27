@@ -45,7 +45,7 @@ init()
     <template #empty>
       <div flex flex-col items-center justify-center h-full>
         <img :src="empty" width="300">
-        <div text-6 mt-6>Empty</div>
+        <div text-6 mt-6>{{ $t('tip.noServer') }}</div>
       </div>
     </template>
   </DataView>

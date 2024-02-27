@@ -63,7 +63,7 @@ watch(valid, v => {
     <template #header>
       <div class="flex items-center">
         <router-link :to="backPath">
-          <Button icon="i-mdi:arrow-left" label="back" size="small" />
+          <Button icon="i-mdi:arrow-left" :label="$t('tip.back')" size="small" />
         </router-link>
         <div flex-1></div>
         <DataViewLayoutOptions v-model="layout" />
