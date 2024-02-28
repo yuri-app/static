@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Breadcrumb: typeof import('primevue/breadcrumb')['default']
     Button: typeof import('primevue/button')['default']
     DataView: typeof import('primevue/dataview')['default']
     DataViewLayoutOptions: typeof import('primevue/dataviewlayoutoptions')['default']

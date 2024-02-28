@@ -15,6 +15,7 @@ interface StaticDirectory {
 
 interface ScopeResponse {
   origin: string
+  path: string
 }
 
 export interface RootResponse {

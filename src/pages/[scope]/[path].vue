@@ -2,6 +2,7 @@
 import { ListResponse } from '@/request/'
 import { appInject } from '@/inject'
 import empty from '@/assets/no-file.svg'
+import { MenuItem } from 'primevue/menuitem';
 
 
 const route = useRoute()
@@ -16,6 +17,28 @@ const list = ref<ListResponse>([])
 const validScope = ref(true)
 const validPath = ref(true)
 const origin = ref('')
+const rootPath = ref('')
+const pathItems = computed<Array<MenuItem>>(() => {
+  const data = [
+    {
+      label: rootPath.value,
+      route: `/${props.scope}/${encodeURIComponent('/')}`
+    }
+  ]
+  for (let i = 1, j = 1; i < props.path.length; i++) {
+    if (props.path[i] == '/') {
+      data.push({
+        label: props.path.slice(j, i),
+        route: `/${props.scope}/${encodeURIComponent(props.path.slice(0, i + 1))}`
+      })
+      j = i + 1
+    }
+  }
+  const last: MenuItem = data.at(-1)!
+  last.class = 'text-primary-500'
+  return data
+})
+
 const { layout } = appInject()
 
 const valid = computed(() => validScope.value && validPath.value)
@@ -41,15 +64,20 @@ async function init() {
     return
   }
   origin.value = result.origin
+  rootPath.value = result.path
+  await refresh()
+}
+
+async function refresh() {
   try {
-    list.value = await fetchList(result.origin, props.path)
+    list.value = await fetchList(origin.value, props.path)
     validPath.value = true
   } catch (error) {
     validPath.value = false
   }
 }
 
-watchImmediate(() => route.fullPath, init)
+watch(() => route.fullPath, refresh)
 
 watch(valid, v => {
   if (!v) {
@@ -58,18 +86,29 @@ watch(valid, v => {
     })
   }
 })
+
+init()
 </script>
 
 
 <template>
   <DataView :value="list" :layout="layout" :data-key="undefined" h-full>
     <template #header>
-      <div class="flex items-center">
-        <router-link :to="backPath">
-          <Button icon="i-mdi:arrow-left" :label="$t('tip.back')" size="small" />
-        </router-link>
-        <div flex-1></div>
-        <DataViewLayoutOptions v-model="layout" />
+      <div space-y-4>
+        <div class="flex items-center">
+          <router-link :to="backPath">
+            <Button icon="i-mdi:arrow-left" :label="$t('tip.back')" size="small" />
+          </router-link>
+          <div flex-1></div>
+          <DataViewLayoutOptions v-model="layout" />
+        </div>
+        <Breadcrumb :model="pathItems">
+          <template #item="{ item }">
+            <router-link :to="item.route" whitespace-nowrap>
+              {{ item.label }}
+            </router-link>
+          </template>
+        </Breadcrumb>
       </div>
     </template>
 
