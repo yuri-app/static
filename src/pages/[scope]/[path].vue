@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ComponentInstance } from 'vue';
+
 import { ListResponse } from '@/request/'
 import { appInject } from '@/inject'
 import empty from '@/assets/no-file.svg'
@@ -38,6 +40,7 @@ const pathItems = computed<Array<MenuItem>>(() => {
   last.class = 'text-primary-500'
   return data
 })
+const breadcrumb = ref<ComponentInstance<{}>>()
 
 const { layout } = appInject()
 
@@ -75,6 +78,13 @@ async function refresh() {
   } catch (error) {
     validPath.value = false
   }
+  scrollBreadcrumb()
+}
+
+function scrollBreadcrumb() {
+  Object.assign(breadcrumb.value?.$el, {
+    scrollLeft: 99999
+  })
 }
 
 watch(() => route.fullPath, refresh)
@@ -102,7 +112,7 @@ init()
           <div flex-1></div>
           <DataViewLayoutOptions v-model="layout" />
         </div>
-        <Breadcrumb :model="pathItems">
+        <Breadcrumb :model="pathItems" ref="breadcrumb">
           <template #item="{ item }">
             <router-link :to="item.route" whitespace-nowrap>
               {{ item.label }}
