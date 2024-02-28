@@ -1,4 +1,5 @@
 tip:
-  noServer: 没有运行的节点服务器
+  noServer: 没有正在运行的服务器
+  noFile: 该目录为空
   backToHome: 返回首页
   back: 返回

@@ -5,9 +5,9 @@ import notFound from '@/assets/404.svg'
 
 <template>
   <div flex flex-col items-center justify-center h-screen>
-    <img :src="notFound" width="500">
+    <img :src="notFound" w-250px sm:w-500px>
     <router-link to="/">
-      <Button :label="$t('tip.backToHome')" mt-100px />
+      <Button :label="$t('tip.backToHome')" mt-24 />
     </router-link>
   </div>
 </template>

@@ -2,7 +2,7 @@
 import { appInject } from '@/inject'
 
 import { RootResponse } from '@/request';
-import empty from '@/assets/empty.svg'
+import empty from '@/assets/no-server.svg'
 
 const { layout } = appInject()
 
@@ -44,8 +44,8 @@ init()
 
     <template #empty>
       <div flex flex-col items-center justify-center h-full>
-        <img :src="empty" width="300">
-        <div text-6 mt-6>{{ $t('tip.noServer') }}</div>
+        <img :src="empty" w-200px sm:w-300px>
+        <div text-4 sm:text-6 mt-6>{{ $t('tip.noServer') }}</div>
       </div>
     </template>
   </DataView>

@@ -1,4 +1,5 @@
 tip:
-  noServer: No running node servers
+  noServer: There are no running servers
+  noFile: The directory is empty
   backToHome: Back to home
   back: Back

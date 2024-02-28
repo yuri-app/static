@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ListResponse } from '@/request/'
 import { appInject } from '@/inject'
+import empty from '@/assets/no-file.svg'
 
 
 const route = useRoute()
@@ -85,6 +86,13 @@ watch(valid, v => {
           :to="type == 'directory' ? `${$route.fullPath}${encodeURIComponent(name + '/')}` : `/file/${encodeURIComponent(origin + props.path + name)}`"
           :type="type" :name="name" :layout="layout">
         </Link>
+      </div>
+    </template>
+
+    <template #empty>
+      <div flex flex-col items-center justify-center h-full>
+        <img :src="empty" w-200px sm:w-300px>
+        <div text-4 sm:text-6 mt-6>{{ $t('tip.noFile') }}</div>
       </div>
     </template>
   </DataView>
