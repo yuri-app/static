@@ -53,7 +53,9 @@ watchImmediate(() => route.fullPath, init)
 
 watch(valid, v => {
   if (!v) {
-    router.push('/404')
+    router.push({
+      name: 'all'
+    })
   }
 })
 </script>
