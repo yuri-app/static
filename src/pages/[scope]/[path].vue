@@ -160,22 +160,20 @@ init()
     </template>
 
     <template #list="slotProps">
-      <div class="flex flex-wrap overflow-y-auto h-full" @scroll="menu.hide()">
-        <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="w-full p-3"
+      <div class="overflow-y-auto max-h-full" @scroll="menu.hide()">
+        <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="w-full p-3 break-all"
           :to="type == 'directory' ? `${$route.fullPath}${encodeURIComponent(name + '/')}` : `/file/${encodeURIComponent(origin + props.path + name)}`"
-          :type="type" :name="name" :layout="layout"
-          @contextmenu="openMenu($event, { type, name })"
+          :type="type" :name="name" :layout="layout" @contextmenu="openMenu($event, { type, name })"
           v-on-long-press.prevent="$event => openMenu($event, { type, name })">
         </Link>
       </div>
     </template>
 
     <template #grid="slotProps">
-      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 overflow-y-auto h-full" @scroll="menu.hide()">
-        <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="p-3"
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 overflow-y-auto max-h-full" @scroll="menu.hide()">
+        <Link v-for="{ name, type } in slotProps.items" :key="name + type" class="p-3 break-all"
           :to="type == 'directory' ? `${$route.fullPath}${encodeURIComponent(name + '/')}` : `/file/${encodeURIComponent(origin + props.path + name)}`"
-          :type="type" :name="name" :layout="layout"
-          @contextmenu="openMenu($event, { type, name })"
+          :type="type" :name="name" :layout="layout" @contextmenu="openMenu($event, { type, name })"
           v-on-long-press.prevent="$event => openMenu($event, { type, name })">
         </Link>
       </div>

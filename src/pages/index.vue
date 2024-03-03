@@ -27,16 +27,16 @@ init()
     </template>
 
     <template #list="slotProps">
-      <div class="flex flex-wrap">
-        <Link v-for="{ scope, path } in slotProps.items" :key="scope" class="w-full p-3"
+      <div max-h-full>
+        <Link v-for="{ scope, path } in slotProps.items" :key="scope" class="w-full p-3 break-all"
           :to="`/${scope}/${encodeURIComponent('/')}`" type="directory" :name="path" :layout="layout">
         </Link>
       </div>
     </template>
 
     <template #grid="slotProps">
-      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
-          <Link v-for="{ scope, path } in slotProps.items" :key="scope" class="p-3"
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 max-h-full">
+        <Link v-for="{ scope, path } in slotProps.items" :key="scope" class="p-3 break-all"
           :to="`/${scope}/${encodeURIComponent('/')}`" type="directory" :name="path" :layout="layout">
         </Link>
       </div>
