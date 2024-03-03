@@ -28,6 +28,11 @@
   height: 100dvh;
 }
 
+a {
+  -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+  -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+}
+
 [data-pc-name="dataview"] {
   display: flex;
   flex-direction: column;
@@ -35,7 +40,7 @@
 
 [data-pc-name="dataview"] [data-pc-section="content"] {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 [data-pc-name="dataview"] [data-pc-section="emptymessage"] {

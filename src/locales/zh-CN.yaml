@@ -3,3 +3,5 @@ tip:
   noFile: 该目录为空
   backToHome: 返回首页
   back: 返回
+menu:
+  download: 下载

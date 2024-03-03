@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^10.8.0",
     "classnames": "^2.5.1",
     "primevue": "^3.49.0",

@@ -3,3 +3,5 @@ tip:
   noFile: The directory is empty
   backToHome: Back to home
   back: Back
+menu:
+  download: Download
